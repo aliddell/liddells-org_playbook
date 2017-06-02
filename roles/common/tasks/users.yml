@@ -1,0 +1,8 @@
+---
+- name: Create user alan
+  user:
+    name: alan
+    password: "{{ password }}"
+    groups: admin
+    append: yes
+    shell: /usr/bin/fish
