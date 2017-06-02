@@ -1,8 +1,14 @@
 ---
-- name: Create user alan
+- name: ensure sudoer alan, with shell fish (hyuk hyuk)
   user:
     name: alan
-    password: "{{ password }}"
-    groups: admin
+    groups: sudo
     append: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
     shell: /usr/bin/fish
+
+# - name: install oh-my-fish
+#   raw: curl -L http://get.oh-my.fish | fish
+#   become: yes
+#   become_user: alan

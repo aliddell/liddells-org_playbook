@@ -1,24 +1,34 @@
 ---
+# thanks to https://gist.github.com/gwillem/4ba393dceb55e5ae276a87300f6b8e6f
+- name: install python 2
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
 - name: remove vim-tiny
   apt:
     name: vim-tiny
     state: absent
-    purge: true
+    purge: yes
 
 - name: install vim-nox
   apt:
     name: vim-nox
-    state: latest
+    state: present
     update_cache: yes
 
 - name: install vim-pathogen
   apt:
     name: vim-pathogen
-    state: latest
+    state: present
     update_cache: no
 
 - name: install fish
   apt:
     name: fish
-    state: latest
+    state: present
+    update_cache: no
+
+- name: install git
+  apt:
+    name: git
+    state: present
     update_cache: no

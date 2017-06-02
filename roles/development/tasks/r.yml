@@ -1,0 +1,18 @@
+---
+- name: add signing key for R repo
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E084DAB9
+
+- name: enable latest stable repo for R
+  apt_repository:
+    repo: deb https://vps.fmvz.usp.br/CRAN/bin/linux/ubuntu {{ ubuntu_version }}/
+    filename: CRAN
+    state: present
+    update_cache: yes
+
+- name: install R
+  apt:
+    name: r-base
+    state: present
+    update_cache: no

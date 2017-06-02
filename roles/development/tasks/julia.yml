@@ -1,0 +1,17 @@
+---
+- name: add signing key for Julia repo
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 3D3D3ACC
+
+- name: enable latest stable repo for Julia
+  apt_repository:
+      repo: deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu {{ ubuntu_version }} main
+      state: present
+      update_cache: yes
+
+- name: install Julia
+  apt:
+    name: julia
+    state: present
+    update_cache: no

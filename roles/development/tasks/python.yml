@@ -1,0 +1,59 @@
+---
+- name: install pip3
+  apt:
+    name: python3-pip
+    state: present
+    update_cache: yes
+
+- name: upgrade pip3
+  pip:
+    name: pip
+    executable: pip3
+    state: latest
+
+- name: install ipython
+  pip:
+    name: ipython
+    executable: pip3
+    state: present
+
+- name: install jupyter
+  pip:
+    name: jupyter
+    executable: pip3
+    state: present
+
+- name: install numpy
+  pip:
+    name: numpy
+    executable: pip3
+    state: present
+
+- name: install scipy
+  pip:
+    name: scipy
+    executable: pip3
+    state: present
+
+- name: install matplotlib
+  pip:
+    name: matplotlib
+    executable: pip3
+    state: present
+
+- name: install pandas
+  pip:
+    name: pandas
+    executable: pip3
+    state: present
+
+- name: install nltk
+  pip:
+    name: nltk
+    executable: pip3
+    state: present
+
+- name: download NLTK files
+  script: ../files/nltk_init.py
+  become: yes
+  become_user: {{ dev_user }}

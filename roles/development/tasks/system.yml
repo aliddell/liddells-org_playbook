@@ -1,0 +1,12 @@
+---
+- name: install libcurl4-openssl-dev
+  apt:
+      name: libcurl4-openssl-dev
+      state: present
+      update_cache: yes
+
+- name: install libssl-dev
+  apt:
+      name: libssl-dev
+      state: present
+      update_cache: yes
