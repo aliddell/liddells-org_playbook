@@ -1,0 +1,16 @@
+---
+- name: add OpenSSH UFW rule with new port
+  template:
+    src: ../files/openssh-server.j2
+    dest: /etc/ufw/applications.d/openssh-server
+    owner: root
+    group: root
+    mode: 0644
+
+- name: reconfigure SSH server
+  template:
+    src: ../files/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644

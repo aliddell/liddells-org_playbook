@@ -1,7 +1,10 @@
 ---
 # thanks to https://gist.github.com/gwillem/4ba393dceb55e5ae276a87300f6b8e6f
 - name: install python 2
-  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  apt:
+    name: python-minimal
+    state: present
+    update_cache: yes
 
 - name: remove vim-tiny
   apt:
@@ -13,7 +16,7 @@
   apt:
     name: vim-nox
     state: present
-    update_cache: yes
+    update_cache: no
 
 - name: install vim-pathogen
   apt:

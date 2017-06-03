@@ -1,7 +1,7 @@
 ---
-- hosts: testing
+- hosts: test1
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
     - common
     - development

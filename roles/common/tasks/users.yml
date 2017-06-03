@@ -1,14 +1,19 @@
 ---
-- name: ensure sudoer alan, with shell fish (hyuk hyuk)
+- name: ensure sudoer "{{ common_user }}"
   user:
-    name: alan
+    name: "{{ common_user }}"
     groups: sudo
     append: yes
     generate_ssh_key: yes
     ssh_key_bits: 4096
     shell: /usr/bin/fish
 
-# - name: install oh-my-fish
-#   raw: curl -L http://get.oh-my.fish | fish
-#   become: yes
-#   become_user: alan
+- name: install Oh My Fish
+  script: ../files/install-omf.sh
+  become: yes
+  become_user: "{{ common_user }}"
+
+- name: customize Oh My Fish
+  script: ../files/customize.fish
+  become: yes
+  become_user: "{{ common_user }}"

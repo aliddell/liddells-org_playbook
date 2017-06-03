@@ -56,4 +56,4 @@
 - name: download NLTK files
   script: ../files/nltk_init.py
   become: yes
-  become_user: {{ dev_user }}
+  become_user: "{{ dev_user }}"

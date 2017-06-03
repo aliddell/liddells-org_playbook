@@ -6,7 +6,7 @@
 
 - name: enable latest stable repo for R
   apt_repository:
-    repo: deb https://vps.fmvz.usp.br/CRAN/bin/linux/ubuntu {{ ubuntu_version }}/
+    repo: deb https://vps.fmvz.usp.br/CRAN/bin/linux/ubuntu {{ ansible_distribution_release }}/
     filename: CRAN
     state: present
     update_cache: yes
