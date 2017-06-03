@@ -6,10 +6,10 @@
 
 - name: enable latest stable repo for Julia
   apt_repository:
-      repo: deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu {{ ansible_distribution_release }} main
-      filename: staticfloat-ubuntu-juliareleases-{{ ansible_distribution_release }}
-      state: present
-      update_cache: yes
+    repo: deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu {{ ansible_distribution_release }} main
+    filename: staticfloat-ubuntu-juliareleases-{{ ansible_distribution_release }}
+    state: present
+    update_cache: yes
 
 - name: install Julia
   apt:

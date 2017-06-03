@@ -1,0 +1,4 @@
+---
+jupyter_system_user: jupyter
+apache_group: www-data
+jupyter_system_home: /var/www/jupyter

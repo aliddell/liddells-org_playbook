@@ -1,2 +1,0 @@
----
-- name: create Jupyter user {{ jupyter_user }}

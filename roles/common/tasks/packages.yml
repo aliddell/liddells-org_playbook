@@ -1,6 +1,6 @@
 ---
 # thanks to https://gist.github.com/gwillem/4ba393dceb55e5ae276a87300f6b8e6f
-- name: install python 2
+- name: install minimal Python 2
   apt:
     name: python-minimal
     state: present

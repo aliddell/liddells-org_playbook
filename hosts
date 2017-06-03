@@ -1,6 +1,12 @@
 [production]
 liddells.org
 
+[production:vars]
+certbot=yes
+
 [testing]
 test1
 test2
+
+[testing:vars]
+certbot=no

@@ -1,0 +1,30 @@
+---
+- name: remove letsencrypt
+  apt:
+    name: letsencrypt
+    state: absent
+    update_cache: yes
+
+- name: install software-properties-common
+  apt:
+    name: software-properties-common
+    state: present
+    update_cache: no
+
+- name: add signing key for certbot repo
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 75BCA694
+
+- name: enable latest stable repo for certbot
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/certbot/certbot/ubuntu {{ ansible_distribution_release }} main
+    filename: certbot
+    state: present
+    update_cache: yes
+
+- name: install python-certbot-apache
+  apt:
+    name: python-certbot-apache
+    state: present
+    update_cache: no

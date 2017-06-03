@@ -1,0 +1,5 @@
+---
+- include: cerbot.yml
+  when: certbot == "yes"
+- include: selfsigned.yml
+  when: certbot == "no"

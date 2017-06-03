@@ -1,0 +1,8 @@
+---
+- name: create Jupyter user {{ jupyter_system_user }}
+  user:
+    name: "{{ jupyter_system_user }}"
+    groups: "{{ apache_group }}"
+    append: yes
+    system: yes
+    home: "{{ jupyter_system_home }}"

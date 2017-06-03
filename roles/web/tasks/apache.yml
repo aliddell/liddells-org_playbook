@@ -1,0 +1,32 @@
+---
+- name: install apache
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: enable mod_rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+
+- name: enable mod_ssl
+  apache2_module:
+    name: ssl
+    state: present
+
+- name: install main site VirtualHost
+  template:
+    src: ../files/vhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ ansible_fqdn }}.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: disable default site
+  command: a2dissite 000-default
+
+- name: enable main site
+  command: a2ensite {{ ansible_fqdn }}
+  #notify:
+  #- restart apache2

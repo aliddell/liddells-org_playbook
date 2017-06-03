@@ -10,12 +10,14 @@
   - ~~also generate ssh key~~
 7. ~~`curl -L http://get.oh-my.fish | fish` for alan (can't use raw to do this, does not return)~~
 8. ~~install zish theme for oh-my-fish for alan~~
-9. install apache
-  - if production, install letsencrypt and setup domain
+9. ~~install apache~~
+  - if production, ~~install certbot~~
+  - ~~enable mod_rewrite, mod_ssl~~
+  - if production, run certbot; else, generate self-signed cert
 10. ~~install python3-pip~~
 11. ~~upgrade pip with pip~~
-12. install packages with pip
-  - django
+12. ~~install packages with pip~~
+  - ~~django~~
   - ~~ipython~~
   - ~~jupyter~~
   - ~~matplotlib~~
@@ -38,5 +40,6 @@
 19. set up Jupyter notebook server (relevant info [here](http://jupyter-notebook.readthedocs.io/en/latest/public_server.html))
   - create user `jupyter` with appropriate permissions for serving up on the web
   - set up password for jupyter notebook (use Vault and template module)
-  - create Jupyter UFW profile and enable
   - create systemd service for jupyter-notebook and enable it
+  - setup Apache to proxy jupyter
+    - enable mod_proxy, mod_proxy_http, mod_ssl
