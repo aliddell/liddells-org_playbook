@@ -11,31 +11,31 @@
     executable: pip3
     state: latest
 
-- name: install ipython
+- name: install IPython
   pip:
     name: ipython
     executable: pip3
     state: present
 
-- name: install jupyter
+- name: install Jupyter
   pip:
     name: jupyter
     executable: pip3
     state: present
 
-- name: install numpy
+- name: install NumPy
   pip:
     name: numpy
     executable: pip3
     state: present
 
-- name: install scipy
+- name: install SciPy
   pip:
     name: scipy
     executable: pip3
     state: present
 
-- name: install matplotlib
+- name: install Matplotlib
   pip:
     name: matplotlib
     executable: pip3
@@ -47,9 +47,21 @@
     executable: pip3
     state: present
 
-- name: install nltk
+- name: install NLTK
   pip:
     name: nltk
+    executable: pip3
+    state: present
+
+- name: install scikit-learn
+  pip:
+    name: scikit-learn
+    executable: pip3
+    state: present
+
+- name: install Beautiful Soup
+  pip:
+    name: beautifulsoup4
     executable: pip3
     state: present
 
