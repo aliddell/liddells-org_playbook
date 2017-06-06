@@ -1,10 +1,7 @@
 ---
 # thanks to https://gist.github.com/gwillem/4ba393dceb55e5ae276a87300f6b8e6f
 - name: install minimal Python 2
-  apt:
-    name: python-minimal
-    state: present
-    update_cache: yes
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
 - name: remove vim-tiny
   apt:
@@ -24,9 +21,9 @@
     state: present
     update_cache: no
 
-- name: install fish
+- name: install zsh
   apt:
-    name: fish
+    name: zsh
     state: present
     update_cache: no
 

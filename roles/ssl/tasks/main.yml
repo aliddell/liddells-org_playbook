@@ -1,5 +1,6 @@
 ---
-- include: cerbot.yml
+- include: apache.yml
+- include: certbot.yml
   when: certbot == "yes"
 - include: selfsigned.yml
   when: certbot == "no"

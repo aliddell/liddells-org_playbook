@@ -1,19 +1,14 @@
 ---
-- name: ensure sudoer "{{ common_user }}"
+- name: create sudoer "{{ common_user }}"
   user:
     name: "{{ common_user }}"
     groups: sudo
     append: yes
     generate_ssh_key: yes
     ssh_key_bits: 4096
-    shell: /usr/bin/fish
+    shell: /usr/bin/zsh
 
-- name: install Oh My Fish
-  script: ../files/install-omf.sh
-  become: yes
-  become_user: "{{ common_user }}"
-
-- name: customize Oh My Fish
-  script: ../files/customize.fish
+- name: install Oh My Zsh
+  script: ../files/install-oh-my-zsh.sh
   become: yes
   become_user: "{{ common_user }}"

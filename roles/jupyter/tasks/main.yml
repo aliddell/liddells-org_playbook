@@ -1,2 +1,7 @@
 ---
-- include: system.yml
+- include: config.yml
+- include: kernels.yml
+- include: apache.yml
+- include: ssl.yml
+  when: certbot == "yes"
+- include: systemd.yml

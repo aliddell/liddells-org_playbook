@@ -3,8 +3,8 @@
   become: yes
   gather_facts: true
   roles:
-    #- common
-    - web
-    #- ssl
-    #- development
-    #- jupyter
+    - common
+    - apache
+    - development
+    - ssl
+    - jupyter

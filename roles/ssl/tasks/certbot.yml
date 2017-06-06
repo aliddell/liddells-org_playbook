@@ -28,3 +28,16 @@
     name: python-certbot-apache
     state: present
     update_cache: no
+
+- name: create and install SSL certificates
+  command: certbot --apache --domains {{ certbot_domains }} --email {{ certbot_email }} {{ certbot_opts }}
+
+- name: setup cron job to autorenew cert
+  cron:
+    name: renew SSL cert every {{ certbot_renew_freq }} months
+    job: certbot renew
+    month: "*/{{ certbot_renew_freq }}"
+    day: "{{ certbot_renew_day }}"
+    hour: "{{ certbot_renew_hour }}"
+    minute: "{{ certbot_renew_minute }}"
+    state: present

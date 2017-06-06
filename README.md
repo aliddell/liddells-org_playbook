@@ -1,45 +1,32 @@
-# TASKS
+# WHAT THIS PLAYBOOK DOES
 
-1. change default ssh port to {{ variable }} (use lineinfile module)
-2. restart ssh server
-3. change OpenSSH profile for UFW to reflect {{ variable }} port
-  - these three are harder than they seem, but doable (see [here](https://dmsimard.com/2016/03/15/changing-the-ssh-port-with-ansible/))
-4. enable UFW (may need to reload app profile)
-5. ~~install fish and vim~~
-6. ~~create sudoer alan with default shell fish (add alan to group "admin")~~
-  - ~~also generate ssh key~~
-7. ~~`curl -L http://get.oh-my.fish | fish` for alan (can't use raw to do this, does not return)~~
-8. ~~install zish theme for oh-my-fish for alan~~
-9. ~~install apache~~
-  - if production, ~~install certbot~~
-  - ~~enable mod_rewrite, mod_ssl~~
-  - if production, run certbot; else, generate self-signed cert
-10. ~~install python3-pip~~
-11. ~~upgrade pip with pip~~
-12. ~~install packages with pip~~
-  - ~~django~~
-  - ~~ipython~~
-  - ~~jupyter~~
-  - ~~matplotlib~~
-  - ~~nltk~~
-    - ~~`nltk.download("all")`~~
-  - ~~numpy~~
-  - ~~scipy~~
-  - ~~pandas~~
-13. ~~enable latest stable repo for R~~
-  - ~~add `deb https://vps.fmvz.usp.br/CRAN/bin/linux/ubuntu xenial/` to /etc/apt/sources.list~~
-  - ~~add Michael Rutter's GPG key `apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9`~~
-  - ~~update~~
-14. ~~install r-base~~
-15. ~~enable julia repo: `add-apt-repository ppa:staticfloat/juliareleases`~~
-16. ~~install julia~~
-17. ~~install libcurl4-openssl-dev libssl-dev~~
-18. install R and Julia kernels for Jupyter
-  - ~~for Julia: `Pkg.add("IJulia")` (instructions [here](https://github.com/JuliaLang/IJulia.jl]))~~
-  - for R: (instructions [here](https://github.com/IRkernel/IRkernel))
-19. set up Jupyter notebook server (relevant info [here](http://jupyter-notebook.readthedocs.io/en/latest/public_server.html))
-  - create user `jupyter` with appropriate permissions for serving up on the web
-  - set up password for jupyter notebook (use Vault and template module)
-  - create systemd service for jupyter-notebook and enable it
-  - setup Apache to proxy jupyter
-    - enable mod_proxy, mod_proxy_http, mod_ssl
+This playbook sets up a poor man's R, Python, and Julia development server on Ubuntu 16.04 LTS.
+It installs and updates the Python 3 package `pip`, which it then uses to install the following Python libraries:
+  - django
+  - jupyter
+  - ipython
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - scikit-learn
+  - nltk
+Then it enables the latest stable repos for both the R and Julia programming languages and installs those respective runtimes.
+After that, it installs Jupyter Notebook kernels for each of these.
+Finally, it sets up a password-protected Jupyter Notebook server and proxies it behind an Apache VirtualHost at the subdomain `data.`.
+(Most of my info for the Jupyter Notebook server was taken from [here](https://jupyter-notebook.readthedocs.io/en/latest/public_server.html).)
+It uses LetsEncrypt to handle creating SSL certificates on production sites (i.e., sites accessible to the public Internet with their own domain names).
+On testing sites, it uses the snakeoil certificate gotten by installing the `ssl-cert` package through `apt`.
+
+# USING THIS PLAYBOOK
+
+I don't recommend anyone using this playbook, since it's mostly here for my own use, but if you must, here's what you do (you should already be pretty familiar with how Ansible works):
+
+You should go through each of the roles here and find the vars which are encrypted with [Vault](https://docs.ansible.com/ansible/playbooks_vault.html), then encrypt the corresponding variables you'll want to use (SHA1 hashes, email addresses, &c.) and replace those.
+You should also go and replace subdomains and system user names where appropriate.
+If you want to go ahead and install [other Jupyter kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels), you should fork this repo (you should fork this repo anyway if you're going to use it at all) and then submit a pull request.
+
+# TODO
+
+  - Proxy Django behind a subdomain (`alan.`?) and start building out an expo site
+  - Install SageMath and Haskell kernels (maybe)

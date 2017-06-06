@@ -1,0 +1,34 @@
+---
+- name: enable mod_proxy
+  apache2_module:
+    name: proxy
+    state: present
+
+- name: enable mod_proxy_http
+  apache2_module:
+    name: proxy_http
+    state: present
+
+- name: enable mod_headers
+  apache2_module:
+    name: headers
+    state: present
+
+- name: install Jupyter proxy VirtualHost
+  template:
+    src: ../files/proxy-vhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ jupyter_domain }}.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: install Jupyter proxy SSL VirtualHost
+  template:
+    src: ../files/proxy-vhost-ssl.conf.j2
+    dest: /etc/apache2/sites-available/{{ jupyter_domain }}-le-ssl.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable Jupyter proxy
+  command: a2ensite {{ jupyter_domain }} {{ jupyter_domain }}-le-ssl

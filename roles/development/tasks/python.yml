@@ -64,8 +64,3 @@
     name: beautifulsoup4
     executable: pip3
     state: present
-
-- name: download NLTK files
-  script: ../files/nltk_init.py
-  become: yes
-  become_user: "{{ dev_user }}"

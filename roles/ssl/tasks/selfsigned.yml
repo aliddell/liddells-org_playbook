@@ -1,1 +1,30 @@
 ---
+- name: enable snakeoil cert
+  apt:
+    name: ssl-cert
+    state: present
+    update_cache: yes
+
+- name: install SSL VirtualHost
+  template:
+    src: ../files/vhost-ssl.conf.j2
+    dest: /etc/apache2/sites-available/{{ ansible_fqdn }}_ssl.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: force redirect to SSL
+  blockinfile:
+    backup: yes
+    path: /etc/apache2/sites-available/{{ ansible_fqdn }}.conf
+    block: |
+      RewriteEngine on
+      RewriteCond %{SERVER_NAME} ={{ ansible_fqdn }} [OR]
+      RewriteCond %{SERVER_NAME} =www.{{ ansible_fqdn }}
+      RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+    insertbefore: ^<\/VirtualHost>$
+  #when: selfsigned_redirect == "yes"
+
+- name: enable SSL site
+  command: a2ensite {{ ansible_fqdn }}_ssl
+  notify: restart apache2

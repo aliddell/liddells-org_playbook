@@ -1,0 +1,6 @@
+---
+- name: install django
+  pip:
+    name: django
+    executable: pip3
+    state: present

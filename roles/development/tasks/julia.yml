@@ -16,8 +16,3 @@
     name: julia
     state: present
     update_cache: no
-
-- name: install IJulia kernel
-  script: ../files/ijulia_init.jl
-  become: yes
-  become_user: "{{ dev_user }}"

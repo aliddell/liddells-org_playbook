@@ -1,0 +1,15 @@
+---
+- name: download NLTK files
+  script: ../files/nltk_init.py
+  become: yes
+  become_user: "{{ jupyter_system_user }}"
+
+- name: install IJulia kernel
+  script: ../files/ijulia_init.jl
+  become: yes
+  become_user: "{{ jupyter_system_user }}"
+
+- name: install IRkernel
+  script: ../files/ir_init.R
+  become: yes
+  become_user: "{{ jupyter_system_user }}"

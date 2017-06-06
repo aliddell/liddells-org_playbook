@@ -1,19 +1,9 @@
 ---
-- name: install apache
+- name: install Apache
   apt:
     name: apache2
     state: present
     update_cache: yes
-
-- name: enable mod_rewrite
-  apache2_module:
-    name: rewrite
-    state: present
-
-- name: enable mod_ssl
-  apache2_module:
-    name: ssl
-    state: present
 
 - name: install main site VirtualHost
   template:
@@ -28,5 +18,5 @@
 
 - name: enable main site
   command: a2ensite {{ ansible_fqdn }}
-  #notify:
-  #- restart apache2
+  notify:
+  - restart apache2
