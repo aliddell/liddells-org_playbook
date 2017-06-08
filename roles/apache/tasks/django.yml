@@ -4,3 +4,8 @@
     name: django
     executable: pip3
     state: present
+
+- name: enable mod_wsgi
+  apache2_module:
+    name: wsgi
+    state: present

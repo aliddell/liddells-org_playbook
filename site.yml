@@ -1,5 +1,5 @@
 ---
-- hosts: test1
+- hosts: production
   become: yes
   gather_facts: true
   roles:
