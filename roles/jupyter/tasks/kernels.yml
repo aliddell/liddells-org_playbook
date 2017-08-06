@@ -4,7 +4,7 @@
   become: yes
   become_user: "{{ jupyter_system_user }}"
 
-- name: install IJulia kernel
+- name: install IJulia kernel + packages (takes approximately one year)
   script: ../files/ijulia_init.jl
   become: yes
   become_user: "{{ jupyter_system_user }}"

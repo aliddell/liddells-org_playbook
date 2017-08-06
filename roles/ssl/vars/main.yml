@@ -1,5 +1,5 @@
 ---
-certbot_domains: "{{ ansible_fqdn }},www.{{ ansible_fqdn }}"
+certbot_domains: "{{ ansible_fqdn }},www.{{ ansible_fqdn }},{{ expo_subdomain }}.{{ ansible_fqdn }}"
 certbot_email: !vault |
                $ANSIBLE_VAULT;1.1;AES256
                33656461393763616235356633626539323562343034393430633134326339613765363661333137

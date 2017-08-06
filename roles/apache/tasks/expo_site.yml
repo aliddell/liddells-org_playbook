@@ -1,0 +1,21 @@
+---
+- name: make directory for static files
+  file:
+    path: "{{ expo_docroot }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: install expo subdomain VirtualHost
+  template:
+    src: ../files/expo-vhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ expo_subdomain}}.{{ ansible_fqdn }}.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable expo site
+  command: a2ensite {{ expo_subdomain }}.{{ ansible_fqdn }}
+  notify:
+  - restart apache2

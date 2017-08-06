@@ -35,6 +35,12 @@
     executable: pip3
     state: present
 
+- name: install SymPy
+  pip:
+    name: scipy
+    executable: pip3
+    state: present
+
 - name: install Matplotlib
   pip:
     name: matplotlib

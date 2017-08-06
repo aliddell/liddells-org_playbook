@@ -26,6 +26,11 @@ You should go through each of the roles here and find the vars which are encrypt
 You should also go and replace subdomains and system user names where appropriate.
 If you want to go ahead and install [other Jupyter kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels), you should fork this repo (you should fork this repo anyway if you're going to use it at all) and then submit a pull request.
 
+For me:
+
+    $ ansible-playbook -i hosts --vault-password-file $VAULTPWFILE --ask-become-pass site.yml
+
 # TODO
 
-  - Proxy Django behind a subdomain (`alan.`?) and start building out an expo site
+  - Clone alan.liddells.org repo instead of just creating empty /var/www/alan
+  - Build out expo site

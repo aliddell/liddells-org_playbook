@@ -32,3 +32,15 @@
     name: git
     state: present
     update_cache: no
+
+- name: install gnupg2
+  apt:
+    name: gnupg2
+    state: present
+    update_cache: no
+
+- name: install postgresql
+  apt:
+    name: postgresql
+    state: present
+    update_cache: no

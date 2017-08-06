@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+	ServerName {{expo_subdomain}}.{{ ansible_fqdn }}
+
+	ServerAdmin webmaster@{{ ansible_fqdn }}
+	DocumentRoot {{ expo_docroot }}
+
+	WSGIDaemonProcess {{ expo_subdomain }}.{{ ansible_fqdn }} python-path={{ expo_docroot }}
+	WSGIProcessGroup {{ expo_subdomain }}.{{ ansible_fqdn }}
+	WSGIScriptAlias / {{ expo_docroot }}/{{ expo_subdomain }}/wsgi.py
+
+	<Directory {{ expo_docroot }}/{{ expo_subdomain }}>
+		<Files wsgi.py>
+			Require all granted
+		</Files>
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error-{{ expo_subdomain }}.log
+	CustomLog ${APACHE_LOG_DIR}/access-{{ expo_subdomain }}.log combined
+</VirtualHost>

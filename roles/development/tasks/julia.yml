@@ -1,18 +1,36 @@
 ---
-- name: add signing key for Julia repo
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 3D3D3ACC
+- name: fetch latest Julia binaries
+  get_url:
+    url: https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz
+    dest: /tmp/julia.tar.gz
+    validate_certs: no
+    checksum: md5:dbc86fe7e774f08becd8878b02c35504
 
-- name: enable latest stable repo for Julia
-  apt_repository:
-    repo: deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu {{ ansible_distribution_release }} main
-    filename: staticfloat-ubuntu-juliareleases-{{ ansible_distribution_release }}
-    state: present
-    update_cache: yes
+- name: create "{{ julia_path }}" for our binaries
+  file:
+    path: "{{ julia_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
 
-- name: install Julia
-  apt:
-    name: julia
-    state: present
-    update_cache: no
+- name: extract Julia
+  unarchive:
+    src: /tmp/julia.tar.gz
+    dest: "{{ julia_path }}"
+    remote_src: yes
+    extra_opts: ['--strip-components=1', '--show-stored-names']
+
+- name: create symlink to julia in /usr/local/bin
+  file:
+    src: "{{ julia_path }}/bin/julia"
+    dest: /usr/local/bin/julia
+    state: link
+    force: yes
+
+- name: create symlink to julia-debug in /usr/local/bin
+  file:
+    src: "{{ julia_path }}/bin/julia-debug"
+    dest: /usr/local/bin/julia-debug
+    state: link
+    force: yes

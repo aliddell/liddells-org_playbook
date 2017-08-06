@@ -5,9 +5,9 @@
     executable: pip3
     state: present
 
-- name: install virtualenv
+- name: install psycopg2
   pip:
-    name: virtualenv
+    name: psycopg2
     executable: pip3
     state: present
 
