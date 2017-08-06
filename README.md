@@ -1,6 +1,6 @@
 # WHAT THIS PLAYBOOK DOES
 
-This playbook sets up a poor man's R, Python, and Julia development server on Ubuntu 16.04 LTS.
+This playbook sets up a poor man's Python and Julia development server on Ubuntu 16.04 LTS.
 It installs and updates the Python 3 package `pip`, which it then uses to install the following Python libraries:
   - django
   - jupyter
@@ -11,8 +11,8 @@ It installs and updates the Python 3 package `pip`, which it then uses to instal
   - pandas
   - scikit-learn
   - nltk
-Then it enables the latest stable repos for both the R and Julia programming languages and installs those respective runtimes.
-After that, it installs Jupyter Notebook kernels for each of these.
+Then it enables the latest stable repo for Julia and installs it.
+After that, it installs a Jupyter Notebook kernels for Julia.
 Finally, it sets up a password-protected Jupyter Notebook server and proxies it behind an Apache VirtualHost at the subdomain `data.`.
 (Most of my info for the Jupyter Notebook server was taken from [here](https://jupyter-notebook.readthedocs.io/en/latest/public_server.html).)
 It uses LetsEncrypt to handle creating SSL certificates on production sites (i.e., sites accessible to the public Internet with their own domain names).
@@ -29,4 +29,3 @@ If you want to go ahead and install [other Jupyter kernels](https://github.com/j
 # TODO
 
   - Proxy Django behind a subdomain (`alan.`?) and start building out an expo site
-  - Install SageMath and Haskell kernels (maybe)

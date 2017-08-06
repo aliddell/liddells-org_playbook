@@ -1,5 +1,4 @@
 ---
 - include: system.yml
 - include: python.yml
-- include: r.yml
 - include: julia.yml

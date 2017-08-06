@@ -5,6 +5,17 @@
     executable: pip3
     state: present
 
+- name: install virtualenv
+  pip:
+    name: virtualenv
+    executable: pip3
+    state: present
+
+- name: install mod_wsgi
+  apt:
+    name: libapache2-mod-wsgi-py3
+    state: present
+
 - name: enable mod_wsgi
   apache2_module:
     name: wsgi

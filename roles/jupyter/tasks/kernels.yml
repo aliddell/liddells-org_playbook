@@ -8,8 +8,3 @@
   script: ../files/ijulia_init.jl
   become: yes
   become_user: "{{ jupyter_system_user }}"
-
-- name: install IRkernel
-  script: ../files/ir_init.R
-  become: yes
-  become_user: "{{ jupyter_system_user }}"
