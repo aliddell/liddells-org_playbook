@@ -6,8 +6,8 @@
 	CustomLog ${APACHE_LOG_DIR}/access-{{ jupyter_subdomain }}.log combined
 
 {% if certbot == "no" %}
-RewriteEngine on
-RewriteCond %{SERVER_NAME} ={{ jupyter_domain }}
-RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+	RewriteEngine on
+	RewriteCond %{SERVER_NAME} ={{ jupyter_domain }}
+	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 {% endif %}
 </VirtualHost>

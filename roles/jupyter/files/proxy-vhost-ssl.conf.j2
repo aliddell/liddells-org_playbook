@@ -8,9 +8,19 @@
 	RequestHeader set X-Forwarded-For %{REMOTE_ADDR}e
 	RequestHeader set X-Forwarded-Proto "https"
 
-	ProxyPreserveHost On
-	ProxyPass / http://localhost:{{ jupyter_port }}/
-	ProxyPassReverse / http://localhost:{{ jupyter_port }}/
+	# thanks to https://stackoverflow.com/questions/23890386/how-to-run-ipython-behind-an-apache-proxy/28819231#28819231
+	# for the following blocks
+	<Location />
+		ProxyPass               http://localhost:{{ jupyter_port }}/
+		ProxyPassReverse        http://localhost:{{ jupyter_port }}/
+		ProxyPassReverseCookieDomain    localhost {{ jupyter_domain }}
+		RequestHeader set Origin "http://localhost:{{ jupyter_port }}"
+  </Location>
+
+	<Location /api/kernels/>
+		ProxyPass               ws://localhost:{{ jupyter_port }}/api/kernels/
+		ProxyPassReverse        ws://localhost:{{ jupyter_port }}/api/kernels/
+	</Location>
 
 	ErrorLog ${APACHE_LOG_DIR}/error-{{ jupyter_subdomain }}.log
 	CustomLog ${APACHE_LOG_DIR}/access-{{ jupyter_subdomain }}.log combined

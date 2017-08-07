@@ -9,6 +9,11 @@
     name: proxy_http
     state: present
 
+- name: enable mod_proxy_wstunnel
+  apache2_module:
+    name: proxy_wstunnel
+    state: present
+
 - name: enable mod_headers
   apache2_module:
     name: headers
