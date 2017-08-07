@@ -1,5 +1,5 @@
 ---
-- name: make directory for static files
+- name: make directory for expo site
   file:
     path: "{{ expo_docroot }}"
     state: directory

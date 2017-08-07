@@ -1,4 +1,4 @@
 ---
 web_docroot: /var/www/html
 expo_subdomain: alan
-expo_docroot: /var/www/{{ expo_subdomain }}
+expo_docroot: /var/{{ expo_subdomain }}
